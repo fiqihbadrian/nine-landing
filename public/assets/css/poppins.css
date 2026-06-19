@@ -1,0 +1,11 @@
+/* Poppins Font - Fallback to System Font */
+body,
+h1, h2, h3, h4, h5, h6,
+p, span, div, a, button, input, select, textarea,
+.logo-text, .nav-link, .stat-label, .stat-value,
+.user-info, .table-header, .custom-table,
+.page-header, .filter-btn, .btn {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif !important;
+}
+
+/* Jika Poppins tidak tersedia, gunakan system font */
