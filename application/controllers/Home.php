@@ -8,7 +8,10 @@ class Home extends CI_Controller
     {
         $this->load->view('v_header');
         $this->load->view('v_navbar');
-        $this->load->view('v_home');
+        $this->load->view('v_hero');
+        $this->load->view('v_about');
+        $this->load->view('v_product');
+        $this->load->view('v_form');
         $this->load->view('v_footer');
     }
 }
