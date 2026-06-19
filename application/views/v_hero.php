@@ -1,4 +1,3 @@
-<main>
-
-
-</main>
+<div id="hero">
+    s
+</div>
