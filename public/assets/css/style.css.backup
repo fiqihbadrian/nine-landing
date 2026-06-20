@@ -1,6 +1,6 @@
 :root {
-  --primary-color: #800000;
-  --primary-dark: #660000;
+  --primary-color: #dc2626;
+  --primary-dark: #b91c1c;
   --secondary-color: #2ecc71;
   --dark-bg: #1a1d29;
   --card-bg: #242837;
@@ -10,13 +10,13 @@
   --border-color: #3a3d52;
   --success: #2ecc71;
   --warning: #f39c12;
-  --danger: #800000;
+  --danger: #dc2626;
   --info: #3498db;
   --shadow: 0 4px 18px rgba(0, 0, 0, 0.05);
   --radius: 12px;
   --gap: 18px;
-  --accent: #800000;
-  --accent-rgb: 128, 0, 0;
+  --accent: #dc2626;
+  --accent-rgb: 220, 38, 38;
 }
 
 * {
@@ -815,86 +815,4 @@ body {
     .sidebar .menu-toggle {
         display: none !important;
     }
-}
-
-/* ========== Bootstrap Table Dark Theme Override ========== */
-:root {
-    --bs-body-bg: #1a1d29 !important;
-    --bs-body-color: #ffffff !important;
-    --bs-table-bg: transparent !important;
-    --bs-table-color: #ffffff !important;
-    --bs-table-border-color: rgba(255, 255, 255, 0.1) !important;
-    --bs-table-striped-bg: rgba(255, 255, 255, 0.05) !important;
-    --bs-table-hover-bg: rgba(128, 0, 0, 0.1) !important;
-}
-
-.table {
-    --bs-table-bg: transparent !important;
-    --bs-table-color: #ffffff !important;
-    background-color: transparent !important;
-    color: #ffffff !important;
-}
-
-.table > :not(caption) > * > * {
-    background-color: transparent !important;
-    color: #ffffff !important;
-}
-
-.table tbody {
-    background-color: transparent !important;
-}
-
-.table td, .table th {
-    background-color: transparent !important;
-    color: #ffffff !important;
-    border-color: rgba(255, 255, 255, 0.1) !important;
-}
-
-/* ========== Bootstrap Pagination Dark Theme ========== */
-:root {
-    --bs-link-color: #800000 !important;
-    --bs-link-hover-color: #660000 !important;
-    --bs-border-color: rgba(255, 255, 255, 0.1) !important;
-    --bs-tertiary-bg: rgba(255, 255, 255, 0.05) !important;
-    --bs-secondary-bg: rgba(255, 255, 255, 0.08) !important;
-    --bs-secondary-color: #a0a4b8 !important;
-}
-
-.pagination {
-    --bs-pagination-bg: #242837 !important;
-    --bs-pagination-color: #ffffff !important;
-    --bs-pagination-border-color: rgba(255, 255, 255, 0.1) !important;
-    --bs-pagination-hover-bg: rgba(128, 0, 0, 0.2) !important;
-    --bs-pagination-hover-color: #ffffff !important;
-    --bs-pagination-focus-bg: rgba(128, 0, 0, 0.1) !important;
-    --bs-pagination-focus-color: #ffffff !important;
-    --bs-pagination-active-bg: #800000 !important;
-    --bs-pagination-active-border-color: #800000 !important;
-    --bs-pagination-active-color: #ffffff !important;
-    --bs-pagination-disabled-bg: rgba(255, 255, 255, 0.05) !important;
-    --bs-pagination-disabled-color: #64748b !important;
-}
-
-.page-link {
-    background-color: #242837 !important;
-    color: #ffffff !important;
-    border-color: rgba(255, 255, 255, 0.1) !important;
-}
-
-.page-link:hover {
-    background-color: rgba(128, 0, 0, 0.2) !important;
-    color: #ffffff !important;
-    border-color: #800000 !important;
-}
-
-.page-item.active .page-link {
-    background-color: #800000 !important;
-    border-color: #800000 !important;
-    color: #ffffff !important;
-}
-
-.page-item.disabled .page-link {
-    background-color: rgba(255, 255, 255, 0.05) !important;
-    color: #64748b !important;
-    border-color: rgba(255, 255, 255, 0.1) !important;
 }

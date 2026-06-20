@@ -3,41 +3,52 @@
     <script src="<?= base_url('public/assets/assets/js/jquery-3.6.0.min.js') ?>"></script>
     <script src="<?= base_url('public/assets/assets/js/bootstrap.bundle.min.js') ?>"></script>
     <script src="<?= base_url('public/assets/assets/plugin/chart/chart.js') ?>"></script>
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
     <script src="<?= base_url('public/assets/js/script.js') ?>"></script>
     
     <script>
-        // Sidebar toggle
-        const sidebar = document.getElementById('sidebar');
-        const menuToggle = document.getElementById('menuToggle');
-        
-        if (menuToggle) {
-            menuToggle.addEventListener('click', () => {
-                sidebar.classList.toggle('collapsed');
-            });
-        }
+        // Data from PHP
+        <?php if(isset($produk_by_kategori) && is_array($produk_by_kategori)): ?>
+        const produkByKategori = <?php echo json_encode($produk_by_kategori); ?>;
+        <?php else: ?>
+        const produkByKategori = [];
+        <?php endif; ?>
 
-        // Mobile menu toggle
-        const menuToggleMobile = document.querySelector('.menu-toggle-mobile');
-        if (menuToggleMobile) {
-            menuToggleMobile.addEventListener('click', () => {
-                sidebar.classList.toggle('mobile-open');
-            });
-        }
+        const stokAman = <?php echo isset($total_produk, $produk_habis, $produk_stok_rendah) ? ($total_produk - $produk_habis - $produk_stok_rendah) : 0; ?>;
+        const stokRendah = <?php echo isset($produk_stok_rendah) ? $produk_stok_rendah : 0; ?>;
+        const stokHabis = <?php echo isset($produk_habis) ? $produk_habis : 0; ?>;
 
-        // Revenue Chart
+        // Produk per Kategori Chart
         const revenueCtx = document.getElementById('revenueChart');
         if (revenueCtx) {
+            const kategoriLabels = produkByKategori.map(item => item.kategori);
+            const kategoriData = produkByKategori.map(item => parseInt(item.total));
+            
             new Chart(revenueCtx, {
-                type: 'line',
+                type: 'bar',
                 data: {
-                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                    labels: kategoriLabels.length > 0 ? kategoriLabels : ['Electronics', 'Fashion', 'Food'],
                     datasets: [{
-                        label: 'Revenue',
-                        data: [12000, 19000, 15000, 25000, 22000, 30000, 28000, 35000, 32000, 40000, 38000, 45000],
-                        borderColor: '#dc2626',
-                        backgroundColor: 'rgba(220, 38, 38, 0.1)',
-                        tension: 0.4,
-                        fill: true
+                        label: 'Jumlah Produk',
+                        data: kategoriData.length > 0 ? kategoriData : [4, 2, 3],
+                        backgroundColor: [
+                            'rgba(220, 38, 38, 0.8)',
+                            'rgba(59, 130, 246, 0.8)',
+                            'rgba(16, 185, 129, 0.8)',
+                            'rgba(245, 158, 11, 0.8)',
+                            'rgba(139, 92, 246, 0.8)'
+                        ],
+                        borderColor: [
+                            '#dc2626',
+                            '#3b82f6',
+                            '#10b981',
+                            '#f59e0b',
+                            '#8b5cf6'
+                        ],
+                        borderWidth: 2,
+                        borderRadius: 8
                     }]
                 },
                 options: {
@@ -46,6 +57,20 @@
                     plugins: {
                         legend: {
                             display: false
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                            titleColor: '#fff',
+                            bodyColor: '#fff',
+                            borderColor: '#dc2626',
+                            borderWidth: 1,
+                            padding: 12,
+                            displayColors: true,
+                            callbacks: {
+                                label: function(context) {
+                                    return ' Produk: ' + context.parsed.y;
+                                }
+                            }
                         }
                     },
                     scales: {
@@ -55,12 +80,13 @@
                                 color: 'rgba(255, 255, 255, 0.1)'
                             },
                             ticks: {
-                                color: '#a0a4b8'
+                                color: '#a0a4b8',
+                                stepSize: 1
                             }
                         },
                         x: {
                             grid: {
-                                color: 'rgba(255, 255, 255, 0.1)'
+                                display: false
                             },
                             ticks: {
                                 color: '#a0a4b8'
@@ -71,21 +97,22 @@
             });
         }
 
-        // Order Status Chart
+        // Status Stok Chart
         const orderStatusCtx = document.getElementById('orderStatusChart');
         if (orderStatusCtx) {
             new Chart(orderStatusCtx, {
                 type: 'doughnut',
                 data: {
-                    labels: ['In Stock', 'Low Stock', 'Out of Stock'],
+                    labels: ['Stok Aman', 'Stok Rendah', 'Habis'],
                     datasets: [{
-                        data: [45, 30, 25],
+                        data: [stokAman, stokRendah, stokHabis],
                         backgroundColor: [
-                            '#2ecc71',
-                            '#f39c12',
-                            '#dc2626'
+                            '#10b981',
+                            '#f59e0b',
+                            '#ef4444'
                         ],
-                        borderWidth: 0
+                        borderWidth: 0,
+                        hoverOffset: 4
                     }]
                 },
                 options: {
@@ -93,12 +120,22 @@
                     maintainAspectRatio: true,
                     plugins: {
                         legend: {
-                            position: 'bottom',
-                            labels: {
-                                color: '#a0a4b8',
-                                padding: 15,
-                                font: {
-                                    family: 'Poppins'
+                            display: false
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                            titleColor: '#fff',
+                            bodyColor: '#fff',
+                            borderColor: '#dc2626',
+                            borderWidth: 1,
+                            padding: 12,
+                            callbacks: {
+                                label: function(context) {
+                                    const label = context.label || '';
+                                    const value = context.parsed || 0;
+                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                    const percentage = total > 0 ? ((value / total) * 100).toFixed(1) : 0;
+                                    return label + ': ' + value + ' (' + percentage + '%)';
                                 }
                             }
                         }
