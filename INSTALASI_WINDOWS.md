@@ -18,7 +18,10 @@
 ### 3. Konfigurasi Database
 - Buka phpMyAdmin di browser: `http://localhost/phpmyadmin`
 - Buat database baru dengan nama `nine_db`
-- Import file database (jika ada) atau buat tabel manual
+- Import file database:
+  - Klik tab "Import"
+  - Pilih file `nine_db.sql` yang ada di folder `/app/`
+  - Klik "Go" untuk import
 
 ### 4. Konfigurasi CodeIgniter
 - Buka file `application/config/config.php`
@@ -52,7 +55,10 @@ $config['base_url'] = 'http://localhost/nine-landing/';
 ### 3. Konfigurasi Database
 - Buka phpMyAdmin: `http://localhost/phpmyadmin`
 - Buat database baru dengan nama `nine_db`
-- Import file database (jika ada)
+- Import file database:
+  - Klik tab "Import"
+  - Pilih file `nine_db.sql` yang ada di folder `/app/`
+  - Klik "Go" untuk import
 
 ### 4. Konfigurasi CodeIgniter
 - Buka file `application/config/config.php`
