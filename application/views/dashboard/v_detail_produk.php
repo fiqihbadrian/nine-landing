@@ -1,5 +1,5 @@
 <div class="dashboard-content">
-    <!-- Page Header -->
+    
     <div class="page-header">
         <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-4 gap-3">
             <div>
@@ -18,7 +18,7 @@
     </div>
 
     <div class="row">
-        <!-- Gambar Produk -->
+        
         <?php if (!empty($produk->gambar)): ?>
         <div class="col-lg-4 mb-4">
             <div class="table-card">

@@ -1,7 +1,7 @@
-<!-- Main Content -->
-    <!-- Top Bar -->
+
+    
     <div class="top-bar">
-        <!-- Mobile Menu Toggle -->
+        
         <button class="mobile-menu-toggle" id="mobileMenuToggle">
             <i class="fas fa-bars"></i>
         </button>
@@ -34,15 +34,15 @@
         </div>
     </div>
 
-    <!-- Dashboard Content -->
+    
     <div class="dashboard-content">
-        <!-- Page Header -->
+        
         <div class="page-header">
             <h1>Dashboard Overview</h1>
             <p>Welcome back! Here's what's happening with your Nine platform today.</p>
         </div>
 
-        <!-- Stats Grid -->
+        
         <div class="stats-grid">
             <div class="stat-card">
                 <div class="stat-header">
@@ -122,7 +122,7 @@
             </div>
         </div>
 
-        <!-- Charts Row -->
+        
         <div class="row">
             <div class="col-lg-8 mb-4">
                 <div class="chart-card">
@@ -163,7 +163,7 @@
             </div>
         </div>
 
-        <!-- Recent Products Table -->
+        
         <div class="row">
             <div class="col-lg-8 mb-4">
                 <div class="table-card">
@@ -235,7 +235,7 @@
             </div>
 
             <div class="col-lg-4 mb-4">
-                <!-- Kategori Card -->
+                
                 <div class="chart-card mb-4">
                     <div class="chart-header">
                         <h3>Kategori Produk</h3>
@@ -262,7 +262,7 @@
                     </div>
                 </div>
 
-                <!-- Recent Activity -->
+                
                 <div class="chart-card">
                     <div class="chart-header">
                         <h3>Recent Activity</h3>

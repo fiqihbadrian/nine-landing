@@ -1,4 +1,4 @@
-<!-- Sidebar -->
+
 <?php
 $requestUri = strtolower($_SERVER['REQUEST_URI'] ?? '');
 $isDashboardActive = strpos($requestUri, 'dashboard') !== false;
@@ -52,5 +52,5 @@ $isProfileActive = strpos($requestUri, 'profile') !== false;
         </ul>
     </aside>
 
-    <!-- Main Content Wrapper -->
+    
     <main class="main-content">

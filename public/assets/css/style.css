@@ -32,7 +32,7 @@ body {
   overflow-x: hidden;
 }
 
-/* Sidebar */
+
 .sidebar {
   width: 260px;
   height: 100vh;
@@ -152,7 +152,7 @@ body {
   display: none;
 }
 
-/* Main Content */
+
 .main-content {
   margin-left: 260px;
   transition: margin-left 0.3s ease;
@@ -163,7 +163,7 @@ body {
   margin-left: 80px;
 }
 
-/* Top Bar */
+
 .top-bar {
   background-color: var(--card-bg);
   border-bottom: 1px solid var(--border-color);
@@ -281,7 +281,7 @@ body {
   font-family: 'Poppins', sans-serif;
 }
 
-/* Dashboard Content */
+
 .dashboard-content {
   padding: 32px;
 }
@@ -303,7 +303,7 @@ body {
   font-family: 'Poppins', sans-serif;
 }
 
-/* Stats Cards */
+
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -408,7 +408,7 @@ body {
   font-family: 'Poppins', sans-serif;
 }
 
-/* Chart Cards */
+
 .chart-card {
   background-color: var(--card-bg);
   border: 1px solid var(--border-color);
@@ -455,7 +455,7 @@ body {
   color: white;
 }
 
-/* Orders Table */
+
 .table-card {
   background-color: var(--card-bg);
   border: 1px solid var(--border-color);
@@ -622,7 +622,7 @@ body {
   display: none;
 }
 
-/* Button Styles */
+
 .btn {
   border-radius: 8px;
   padding: 8px 16px;
@@ -642,7 +642,7 @@ body {
   box-shadow: 0 5px 15px rgba(220, 38, 38, 0.4);
 }
 
-/* Dropdown */
+
 .dropdown-toggle::after {
   display: none !important;
 }
@@ -685,7 +685,7 @@ body {
   padding: 4px 0;
 }
 
-/* Responsive */
+
 @media (max-width: 900px) {
   .menu-toggle-mobile {
     display: block;
@@ -732,7 +732,7 @@ body {
   }
 }
 
-/* Loading Animation */
+
 .loading-spinner {
   width: 40px;
   height: 40px;
@@ -780,7 +780,7 @@ body {
   overflow-x: auto;
 }
 
-/* ========== Mobile Menu Toggle in Top Bar ========== */
+
 .mobile-menu-toggle {
     display: none;
     background: none;
@@ -799,14 +799,14 @@ body {
     color: var(--text-primary);
 }
 
-/* Desktop: Hide mobile toggle completely */
+
 @media (min-width: 769px) {
     .mobile-menu-toggle {
         display: none !important;
     }
 }
 
-/* Mobile: Show mobile toggle, hide sidebar toggle */
+
 @media (max-width: 768px) {
     .mobile-menu-toggle {
         display: block !important;
@@ -817,7 +817,7 @@ body {
     }
 }
 
-/* ========== Bootstrap Table Dark Theme Override ========== */
+
 :root {
     --bs-body-bg: #1a1d29 !important;
     --bs-body-color: #ffffff !important;
@@ -850,7 +850,7 @@ body {
     border-color: rgba(255, 255, 255, 0.1) !important;
 }
 
-/* ========== Bootstrap Pagination Dark Theme ========== */
+
 :root {
     --bs-link-color: #800000 !important;
     --bs-link-hover-color: #660000 !important;

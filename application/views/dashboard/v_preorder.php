@@ -1,5 +1,5 @@
 <div class="dashboard-content">
-    <!-- Page Header -->
+    
     <div class="page-header">
         <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-4 gap-3">
             <div>
@@ -9,7 +9,7 @@
         </div>
     </div>
 
-    <!-- Alert Messages -->
+    
     <?php if ($this->session->flashdata('success')) : ?>
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             <?= $this->session->flashdata('success'); ?>
@@ -24,7 +24,7 @@
         </div>
     <?php endif; ?>
 
-    <!-- Statistics Cards -->
+    
     <div class="row mb-4">
         <div class="col-md-3">
             <div class="stat-card">
