@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nine Store Pre Order</title>
     
+    <link rel="icon" type="image/png" href="<?= base_url('public/assets/images/logo-aplikasi.png') ?>">
+    
     <link href="<?= base_url('public/assets/assets/css/bootstrap.min.css') ?>" rel="stylesheet">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
