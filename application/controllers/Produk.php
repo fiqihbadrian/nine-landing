@@ -43,12 +43,26 @@ class Produk extends CI_Controller
 
     public function simpan()
     {
+        // Validasi input required
+        if (!$this->input->post('nama_produk') || !$this->input->post('harga')) {
+            $this->session->set_flashdata('error', 'Nama produk dan harga harus diisi');
+            redirect('produk/tambah');
+            return;
+        }
+
         // Handle upload gambar
         $gambar_name = null;
         if (!empty($_FILES['gambar']['name'])) {
-            $config['upload_path'] = './public/assets/upload/';
+            $upload_path = FCPATH . 'public/assets/upload/';
+            
+            // Cek apakah folder exists dan writable
+            if (!is_dir($upload_path)) {
+                mkdir($upload_path, 0777, true);
+            }
+            
+            $config['upload_path'] = $upload_path;
             $config['allowed_types'] = 'jpg|jpeg|png|gif|webp';
-            $config['max_size'] = 2048; // 2MB
+            $config['max_size'] = 10240; // 10MB
             $config['encrypt_name'] = TRUE;
             
             $this->load->library('upload', $config);
@@ -57,28 +71,41 @@ class Produk extends CI_Controller
                 $upload_data = $this->upload->data();
                 $gambar_name = $upload_data['file_name'];
             } else {
-                $this->session->set_flashdata('error', $this->upload->display_errors());
+                $error = strip_tags($this->upload->display_errors());
+                $this->session->set_flashdata('error', 'Upload gagal: ' . $error);
                 redirect('produk/tambah');
                 return;
             }
         }
 
+        $stok_s = $this->input->post('stok_s') ? (int)$this->input->post('stok_s') : 0;
+        $stok_m = $this->input->post('stok_m') ? (int)$this->input->post('stok_m') : 0;
+        $stok_l = $this->input->post('stok_l') ? (int)$this->input->post('stok_l') : 0;
+        $stok_xl = $this->input->post('stok_xl') ? (int)$this->input->post('stok_xl') : 0;
+        $stok_xxl = $this->input->post('stok_xxl') ? (int)$this->input->post('stok_xxl') : 0;
+        $stok_total = $this->input->post('stok') ? (int)$this->input->post('stok') : ($stok_s + $stok_m + $stok_l + $stok_xl + $stok_xxl);
+
         $data = [
             'nama_produk' => $this->input->post('nama_produk'),
-            'id_kategori' => $this->input->post('id_kategori'),
+            'id_kategori' => $this->input->post('id_kategori') ?: null,
             'harga' => $this->input->post('harga'),
-            'stok' => $this->input->post('stok'),
-            'stok_s' => $this->input->post('stok_s'),
-            'stok_m' => $this->input->post('stok_m'),
-            'stok_l' => $this->input->post('stok_l'),
-            'stok_xl' => $this->input->post('stok_xl'),
-            'stok_xxl' => $this->input->post('stok_xxl'),
+            'stok' => $stok_total,
+            'stok_s' => $stok_s,
+            'stok_m' => $stok_m,
+            'stok_l' => $stok_l,
+            'stok_xl' => $stok_xl,
+            'stok_xxl' => $stok_xxl,
             'gambar' => $gambar_name
         ];
 
-        $this->M_produk->insert($data);
-        $this->session->set_flashdata('success', 'Produk berhasil ditambahkan');
-        redirect('produk');
+        if ($this->M_produk->insert($data)) {
+            $this->session->set_flashdata('success', 'Produk berhasil ditambahkan');
+            redirect('produk');
+        } else {
+            $db_error = $this->db->error();
+            $this->session->set_flashdata('error', 'Gagal menyimpan produk: ' . $db_error['message']);
+            redirect('produk/tambah');
+        }
     }
 
     public function detail($id)
@@ -123,23 +150,44 @@ class Produk extends CI_Controller
             show_404();
         }
 
+        // Validasi input required
+        if (!$this->input->post('nama_produk') || !$this->input->post('harga')) {
+            $this->session->set_flashdata('error', 'Nama produk dan harga harus diisi');
+            redirect('produk/edit/' . $id);
+            return;
+        }
+
+        $stok_s = $this->input->post('stok_s') ? (int)$this->input->post('stok_s') : 0;
+        $stok_m = $this->input->post('stok_m') ? (int)$this->input->post('stok_m') : 0;
+        $stok_l = $this->input->post('stok_l') ? (int)$this->input->post('stok_l') : 0;
+        $stok_xl = $this->input->post('stok_xl') ? (int)$this->input->post('stok_xl') : 0;
+        $stok_xxl = $this->input->post('stok_xxl') ? (int)$this->input->post('stok_xxl') : 0;
+        $stok_total = $this->input->post('stok') ? (int)$this->input->post('stok') : ($stok_s + $stok_m + $stok_l + $stok_xl + $stok_xxl);
+
         $data = [
             'nama_produk' => $this->input->post('nama_produk'),
-            'id_kategori' => $this->input->post('id_kategori'),
+            'id_kategori' => $this->input->post('id_kategori') ?: null,
             'harga' => $this->input->post('harga'),
-            'stok' => $this->input->post('stok'),
-            'stok_s' => $this->input->post('stok_s'),
-            'stok_m' => $this->input->post('stok_m'),
-            'stok_l' => $this->input->post('stok_l'),
-            'stok_xl' => $this->input->post('stok_xl'),
-            'stok_xxl' => $this->input->post('stok_xxl')
+            'stok' => $stok_total,
+            'stok_s' => $stok_s,
+            'stok_m' => $stok_m,
+            'stok_l' => $stok_l,
+            'stok_xl' => $stok_xl,
+            'stok_xxl' => $stok_xxl
         ];
 
         // Handle upload gambar baru
         if (!empty($_FILES['gambar']['name'])) {
-            $config['upload_path'] = './public/assets/upload/';
+            $upload_path = FCPATH . 'public/assets/upload/';
+            
+            // Cek apakah folder exists dan writable
+            if (!is_dir($upload_path)) {
+                mkdir($upload_path, 0777, true);
+            }
+            
+            $config['upload_path'] = $upload_path;
             $config['allowed_types'] = 'jpg|jpeg|png|gif|webp';
-            $config['max_size'] = 2048; // 2MB
+            $config['max_size'] = 10240; // 10MB
             $config['encrypt_name'] = TRUE;
             
             $this->load->library('upload', $config);
@@ -148,17 +196,50 @@ class Produk extends CI_Controller
                 $upload_data = $this->upload->data();
                 
                 // Hapus gambar lama jika ada
-                if (!empty($produk->gambar) && file_exists('./public/assets/upload/' . $produk->gambar)) {
-                    unlink('./public/assets/upload/' . $produk->gambar);
+                if (!empty($produk->gambar) && file_exists($upload_path . $produk->gambar)) {
+                    unlink($upload_path . $produk->gambar);
                 }
                 
                 $data['gambar'] = $upload_data['file_name'];
+            } else {
+                $error = strip_tags($this->upload->display_errors());
+                $this->session->set_flashdata('error', 'Upload gagal: ' . $error);
+                redirect('produk/edit/' . $id);
+                return;
             }
         }
 
-        $this->M_produk->update($id, $data);
-        $this->session->set_flashdata('success', 'Produk berhasil diperbarui');
-        redirect('produk');
+        if ($this->M_produk->update($id, $data)) {
+            $this->session->set_flashdata('success', 'Produk berhasil diperbarui');
+            redirect('produk');
+        } else {
+            $this->session->set_flashdata('error', 'Gagal memperbarui produk: ' . $this->db->error()['message']);
+            redirect('produk/edit/' . $id);
+        }
+    }
+
+    public function test_insert()
+    {
+        $data = [
+            'nama_produk' => 'Test dari Code',
+            'id_kategori' => 1,
+            'harga' => 99999,
+            'stok' => 99,
+            'stok_s' => 20,
+            'stok_m' => 20,
+            'stok_l' => 20,
+            'stok_xl' => 20,
+            'stok_xxl' => 19,
+            'gambar' => null
+        ];
+        
+        $result = $this->M_produk->insert($data);
+        
+        if ($result) {
+            echo "SUCCESS: Insert berhasil! ID: " . $this->db->insert_id();
+        } else {
+            echo "ERROR: " . print_r($this->db->error(), true);
+        }
     }
 
     public function hapus($id)

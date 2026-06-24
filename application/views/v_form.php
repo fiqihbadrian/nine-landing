@@ -1,4 +1,4 @@
-<div class="min-vh-100 py-5">
+<section id="pre-order" class="min-vh-100 py-5">
     <div class="container py-5">
         <div class="row justify-content-center">
             <div class="col-lg-8 col-md-10">
@@ -108,4 +108,16 @@
             </div>
         </div>
     </div>
-</div>
+</section>
+
+<script>
+function selectProduct(productId) {
+    setTimeout(function() {
+        const selectElement = document.getElementById('id_produk');
+        if (selectElement) {
+            selectElement.value = productId;
+            selectElement.dispatchEvent(new Event('change'));
+        }
+    }, 300);
+}
+</script>

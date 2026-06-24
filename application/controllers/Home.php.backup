@@ -14,7 +14,7 @@ class Home extends CI_Controller
         $this->load->view('v_navbar');
         $this->load->view('v_hero');
         $this->load->view('v_about');
-        $this->load->view('v_product', $data);
+        $this->load->view('v_product');
         $this->load->view('v_form', $data);
         $this->load->view('v_footer');
     }

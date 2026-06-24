@@ -19,6 +19,20 @@
             <h3>Form Edit Produk</h3>
         </div>
         <div style="padding:30px;">
+            <?php if ($this->session->flashdata('success')): ?>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <i class="fas fa-check-circle"></i> <?= $this->session->flashdata('success'); ?>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            <?php endif; ?>
+
+            <?php if ($this->session->flashdata('error')): ?>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <i class="fas fa-exclamation-circle"></i> <?= $this->session->flashdata('error'); ?>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            <?php endif; ?>
+
             <form action="<?= base_url('produk/update/' . $produk->id_produk) ?>" method="post" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label for="nama_produk" class="form-label">Nama Produk</label>
